@@ -1,0 +1,229 @@
+ /*-- iphone用の設定 --*/
+@media screen and (max-width: 430px) {
+.fc-event {
+font-size:18px;/*--event title font size--*/
+margin-bottom: 4px;/*--　帯の隙間 event clearance--*/
+}
+    /*-- ヘッダ　ツールバー --*/
+    .fc-header-toolbar{
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0px;
+        z-index:9;
+    }
+    .fc-center h1{ /*-- 年月表示 --*/
+        margin-top:100px; 
+        height: auto;
+        width:300px;
+    }
+    /*-- カレンダーヘッダ Sun to Sat --*/
+    .fc-head{
+        position: -webkit-sticky;
+        position: sticky;
+        top: 86px;
+        z-index:10;
+    }
+    body{
+        max-width: 400px;
+        max-height: 1000px;
+    }
+}
+body {
+    margin: 0 auto;
+    font-family: fantasy;
+    background:url('http://blog-imgs-88.fc2.com/p/i/p/piposozai/20160224232346d54.png');
+}
+#calendar {
+    position:relative;
+    top:60px;
+    width: 360px;
+    height: 529px;
+    margin: 0 auto;
+    background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTaVuQHMimatWTlXrI7BVHNxnVErByztQGt8rAgaLXKUq5knMjS');
+    background-repeat:repeat;
+    color:#222222;
+}
+.fc-day-number{
+    position: fixed;
+}
+.fc-sat{
+    color:dodgerblue;
+    background-color: rgba( 0, 180, 255, 0.15);
+}
+.fc-sun{
+    color:#FF3333;
+    background-color: rgba( 255, 0, 0, 0.10);
+}
+.fc-header-toolbar{
+    padding-top:10px;
+    margin-bottom: 6px!important;
+}
+.fc-day-grid-event .fc-content{/*--ver 3.9.0 word wrap------*/
+    white-space: normal!important;
+    word-wrap:break-word!important;
+}
+.fc-day-header.fc-widget-header{
+    background-color: darkgrey;
+}
+.fc-today.fc-widget-content{
+    background: url('https://3.bp.blogspot.com/-la0WXIEj3Og/VA7mbmBn1UI/AAAAAAAAmQY/FlJynwAD9ro/s800/yuusya_game.png') !important;
+    background-size:51px,71px !important;
+    background-repeat:no-repeat !important;
+    background-position:bottom !important;
+}
+.map{
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 58px;
+    text-align: center;
+    font-family: fantasy;
+    font-size: 30px;
+    background-color: #333333;
+    color: blueviolet;
+    border: solid 2px;
+    border-radius: 3px;
+    border-radius: 50%;
+    border-color:lightgrey;
+    position: fixed;
+    bottom: 142px;
+    right: 16px;
+    transition: .4s;
+}
+.new-plan {
+    cursor: pointer;
+    width:70px;
+    height:70px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 40px;
+    font-family: fantasy;
+    color:white;
+    background:#0099FF;
+    border: solid 2px;
+    border-radius: 50%;
+    border-color:lightgrey;
+    position: fixed;
+    bottom:130px;
+    right: 15px;
+}
+.change-mode {
+    cursor: pointer;
+    width: 110px;
+    height: 110px;
+    line-height: 100px;
+    text-align:center;
+    font-family: fantasy;
+    font-size: 60px;
+    background-color: #333333;
+    color: darkviolet;
+    border: solid 2px;
+    border-radius: 50%;
+    border-color:lightgrey;
+    position: fixed;
+    bottom: 20px;
+    right: 55px;
+    transition: .4s;
+}
+#loading {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+form {
+    margin: 50px auto 0;
+}
+form input[type="text"] {
+    font-size:20px;
+    width: 290px;
+    height: 30px;
+    line-height: 0;
+}
+form input[type="datetime-local"] {
+    height: 24px;
+    width: 240px;
+}
+#regist {
+    cursor: pointer;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    padding: 12px 0;
+    margin: 16px auto 0;
+    font-size: 20px;
+}
+#close {
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+    color:#666666;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    text-align: center;
+    padding: 12px 0;
+    margin: 16px auto 0;
+    font-size: 16px;
+}
+#regist {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    padding: 2px 0;
+    margin: 16px 16px 0;
+    background: #1763f0;
+    color:#fff;
+}
+#close {
+    position: absolute;
+    font-size: 30px;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border-style: none;
+    text-align: center;
+    margin: 0px 16px 0;
+}
+#mask {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+#modal {
+    background: #fff;
+    width: 300px;
+    padding: 20px;
+    border-radius: 4px;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transition: 0.4s;
+    z-index: 10;
+}
+#close:hover {
+    background-color: white;
+    color:red;
+}
+#close:active {
+    background-color: white;
+    color:red;
+}
+#mask.hidden {
+    display: none;
+}
+#modal.hidden {
+    transform: translate(0, -500px);
+}

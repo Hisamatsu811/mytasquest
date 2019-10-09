@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Super Ultra Excellent Final Hyper Special Callendar</title>
+  <link rel="stylesheet" href="css/styles.css">
+      <!--
+      fullcalendar用CSSファイル
+      参照：https://fullcalendar.io/docs/plugin-index
+    -->
+    <link href='fullcalendar/core/main.css' rel='stylesheet' />
+    <link href='fullcalendar/daygrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/timegrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/list/main.css' rel='stylesheet' />
+    <link href='fullcalendar/bootstrap/main.css' rel='stylesheet' /> 
+    <!--
+      fullcalendar用JSファイル
+      参照：https://fullcalendar.io/docs/plugin-index
+      -->
+     <script src='fullcalendar/core/main.js'></script>
+    <script src="fullcalendar/interaction/main.js"></script>
+    <script src='fullcalendar/daygrid/main.js'></script>
+    <script src='fullcalendar/timegrid/main.js'></script>
+    <script src='fullcalendar/list/main.js'></script>
+    <script src='fullcalendar/bootstrap/main.js'></script>
+    <script src="fullcalendar/google-calendar/main.js"></script>
+    <script src="fullcalendar/rrule/main.js"></script>
+    <script src="fullcalendar/luxon/main.js"></script>
+    <script src='fullcalendar/moment/main.js'></script>
+    <script src='fullcalendar/moment-timezone/main.js'></script> 
+    <!-- fullcalendar のメイン処理（jQuery）-->
+     <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          //とりあえずフルでプラグインを入れとく
+          plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list','bootstrap',  /*'googleCalendar',*/ 'rrule', 'luxon', 'moment', 'momentTimezone' ],
+          //自動で高さ設定
+          contentHeight: 'auto',
+          aspectRatio: 0.75,
+          header: {
+            left: '',
+            center: 'title',
+            right:''
+          },
+          eventSources: [
+            // your event source
+            {
+              url: '/json-events.php',
+              method: 'POST',
+              extraParams: {
+                custom_param1: 'something',
+                custom_param2: 'somethingelse'
+              },
+              failure: function() {
+                alert('イベントの取得中にエラーが発生しました');
+              },
+              color: 'yellow',   // a non-ajax option
+              textColor: 'black' // a non-ajax option
+            }
+            // any other sources...
+          ],
+          // events:[
+          //   {
+          //     title: 'test',
+          //     start: '2019-10-03T12:00',
+          //     end: '2019-10-05T13:00'
+          //   },
+          // ],
+          
+           //イベントをクリックしたら〜
+            eventClick: function(arg) {
+             // opens events in a popup window：ポップアップウィンドウでイベントを開きます
+              window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
+             arg.jsEvent.preventDefault() // don't navigate in main tab：同じタブで開くな！
+          },
+           //カレンダー読み込み終わったら「loading...」の表示を隠す関数っぽい
+            loading: function(bool) {
+              document.getElementById('loading').style.display =
+              bool ? 'block' : 'none';
+          },
+        });
+        calendar.render();
+      });
+    </script>
+</head>
+<body>
+  
+  <!-- <div id="loading">loading...</div> -->
+  <div id="calendar"></div>
+  <!-- <p data-date="2019-10-04">９月４日</p> -->
+
+  <div id="modal" class="hidden">
+    <form id="plan">
+      <label><input type="text" name="title" placeholder="タイトル"></label><br>
+      <hr>
+      <label>開始：<input type="date" name="start_date"></label><input type="time" name="start_time"><br>
+      <label>終了：<input type="date" name="end_date"></label><input type="time" name="end_time"><br>
+      <button type="button" id="regist">登録</button><br>
+    </form>
+    <div id="close">×</div>
+  </div>
+  <div id="mask" class="hidden"></div>
+
+  <div id="open" class="new-plan">＋</div>
+  <div id="open" class="change-mode">M</div>
+
+
+  <!-- <div id="plan_response"></div>  -->
+
+  <script src="./js/modal.js"></script>
+  <script src="./js/regist_plan.js"></script>
+</body>
+</html>

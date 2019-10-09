@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>MyTestCalendar</title>
+    <!-- 
+      fullcalendar用CSSファイル
+      参照：https://fullcalendar.io/docs/plugin-index
+     -->
+    <link href='fullcalendar/core/main.css' rel='stylesheet' />
+    <link href='fullcalendar/daygrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/timegrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar/list/main.css' rel='stylesheet' />
+    <!-- <link href='fullcalendar/bootstrap/main.css' rel='stylesheet' /> -->
+    <!-- 
+      fullcalendar用JSファイル
+      参照：https://fullcalendar.io/docs/plugin-index
+     -->
+    <script src='fullcalendar/core/main.js'></script>
+    <script src="fullcalendar/interaction/main.js"></script>
+    <script src='fullcalendar/daygrid/main.js'></script>
+    <script src='fullcalendar/timegrid/main.js'></script>
+    <script src='fullcalendar/list/main.js'></script>
+    <!-- <script src='fullcalendar/bootstrap/main.js'></script> -->
+    <script src="fullcalendar/google-calendar/main.js"></script>
+    <script src="fullcalendar/rrule/main.js"></script>
+    <script src="fullcalendar/luxon/main.js"></script>
+    <script src='fullcalendar/moment/main.js'></script>
+    <script src='fullcalendar/moment-timezone/main.js'></script>
+    <!-- fullcalendar のメイン処理（jQuery）-->
+</script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          //とりあえずフルでプラグインを入れとく
+          plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list',/*'bootstrap',*/  'googleCalendar', 'rrule', 'luxon', 'moment', 'momentTimezone' ],'locale' : 'ja',
+          // themeSystem: 'bootstrap',
+          /*
+          header：ヘッダー：頭：カレンダーの上の部分。
+          左、中央、右にそれぞれ要素が分かれる。
+          ’’の中身はそれぞれカレンダー機能の正式名称。
+          名称は変えないでください。
+          機能一覧：全部試せばわかる。（けど書く）
+          prev : 前へ
+          next : 次へ
+          today : 今日
+          title : タイトル（だいたいその年）
+          dayGridMonth : その月の予定を日単位でグリッド表示
+          dayGridWeek : その週の予定を日単位でグリッド表示
+          dayGridDay : その日の予定を日単位でグリッド表示
+          timeGridWeek : その週の予定を時間単位でグリッド表示
+          timeGridDay : その日の予定を時間単位でグリッド表示
+          listYear : その年の予定をリスト表示
+          listMonth : その月の予定をリスト表示
+          listDay : その日の予定をリスト表示
+          */
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay,timeGridWeek,timeGridDay,listYear,listMonth,listDay'
+          },
+          //リストビューに時間列を表示するかどうか
+          displayEventTime: false, 
+          //TODO 下準備で取得したAPIキーを''内に入力
+          googleCalendarApiKey: 'AIzaSyAPc6ZuUiW3DuDU67WlxuQuWhclKfRj_48',
+          weekNumbers: true, //週ナンバーの有無（自由）
+          eventLimit: true, // allow "more" link when too many events
+          //TODO 下準備で用意した自分のGoogleカレンダーIDを''内に入力
+          events:{
+            googleCalendarId:'58dgab5460ufnosh8mahhs4vrc@group.calendar.google.com'
+          },
+          //クリックしたら〜
+          eventClick: function(arg) {
+            // opens events in a popup window：ポップアップウィンドウでイベントを開きます
+            window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
+            arg.jsEvent.preventDefault() // don't navigate in main tab：同じタブで開くな！
+          },
+          //カレンダー読み込み終わったら「loading...」の表示を隠す関数っぽい
+          loading: function(bool) {
+            document.getElementById('loading').style.display =
+              bool ? 'block' : 'none';
+          }
+        });
+        calendar.render();
+      });
+    </script>
+    <style>
+        body {
+          width: 98%;
+          margin: 0 auto;
+          padding: 0;
+          font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+          font-size: 14px;
+        }
+        #loading {
+          display: none;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+        }
+        #calendar {
+          width: 98%;
+          max-width: 900px;
+          margin: 0 auto;
+        }
+        .fc-header-toolbar{
+        padding-top:10px;
+        margin-bottom: 6px!important;
+        }
+        .fc-day-grid-event .fc-content{/*--ver 3.9.0 word wrap------*/
+        white-space: normal!important;
+        word-wrap:break-word!important;
+        }
+        /*-- iPhone Vertical View--*/
+        @media screen and (max-width: 480px) {
+            .fc-event {
+                font-size:18px;/*--event title font size-   -*/
+                margin-bottom: 4px;/*--　帯の隙間 event clearance--*/
+            }
+        /*-- ヘッダ　ツールバー --*/
+        .fc-header-toolbar{
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0px;
+            z-index:9;
+            background-color:white;
+        }
+        .fc-center h2{ /*-- 年月表示 --*/
+            margin-top:10px;
+        }
+        /*-- カレンダーヘッダ Sun to Sat --*/
+        .fc-head{
+            position: -webkit-sticky;
+            position: sticky;
+            top: 86px;
+            z-index:10;
+            background-color:#e9e9e9;/*--背景色--*/
+        }
+    }
+    </style>
+  </head>
+  <body>
+    <div id="loading">loading...</div>
+    <div id="calendar"></div>
+  </body>
+</html>
